@@ -4,6 +4,8 @@ import { DragDropContext, Droppable, Draggable, DropResult } from "react-beautif
 import { QuoteType, QuotesType } from "./types/quote";
 import { nanoid } from "nanoid";
 import { FaRegTrashAlt } from "react-icons/fa";
+import "./App.css";
+
 
 const reorder = (list:QuotesType, startIndex:number, endIndex:number) => {
   const result = Array.from(list);
@@ -14,7 +16,7 @@ const reorder = (list:QuotesType, startIndex:number, endIndex:number) => {
 };
 
 const QuoteItem = styled.div`
-  width: 200px;
+  width: 100%;
   border: 1px solid grey;
   margin-bottom: 24px;
   background-color: #90be6d;
@@ -55,6 +57,7 @@ function Quote({ quote, index, onDelete }:QuoteProps) {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
+      
         >
           {quote.label}
        <QuoteDelete onClick={()=> {
@@ -115,18 +118,18 @@ const handleDeleteQuote = (id:string) => {
 
   return (
    <div>
-    <h1>TO DO LIST</h1>
-<form
+    <h1 className="mb-5">TO DO LIST</h1>
+<form className="d-flex align-items-center "
 onSubmit={(e)=>{
   e.preventDefault();
   handleAddQuote();
 }}
 style={{marginBottom:24}}
 >
-  <input value={quoteValue} onChange={(e) => {
+  <input className="w-100 py-1" value={quoteValue} onChange={(e) => {
     setQuoteValue(e.target.value);
   }}/>
-  <button>Add</button>
+  <button className="btn btn-success mx-2">Add</button>
 </form>
 <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="list">
